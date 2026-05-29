@@ -42,20 +42,27 @@ Edit `kai/persona.md` to change her behavior. No code changes needed.
 
 ## Setup
 
+Pick the guide for your OS — each is a complete, copy-paste walkthrough:
+
+- 🪟 **[Windows setup guide](SETUP_WINDOWS.md)** — or just double-click `start.bat`
+- 🐧 **[Linux setup guide](SETUP_LINUX.md)** — handles `python3-venv` and the PEP 668 `externally-managed-environment` error
+
+### Quick version
+
 ```bash
 # 1. Clone the repo
 git clone https://github.com/supasoulja/newb_agent
 cd newb_agent
 
-# 2. Create a virtual environment
-python -m venv .venv
-.venv/Scripts/activate    # Windows
-# source .venv/bin/activate  # Linux/Mac
+# 2. Create and activate a virtual environment
+python3 -m venv .venv
+source .venv/bin/activate      # Linux/Mac
+# .venv\Scripts\activate       # Windows
 
 # 3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Pull required models
+# 4. Pull the required model
 ollama pull qwen3.5:9b            # primary model (~6.3 GB)
 
 # Optional:
@@ -63,12 +70,16 @@ ollama pull qwen3:8b              # reasoning model (~6.0 GB)
 ollama pull qwen3-embedding:4b    # HQ embedding for shutdown re-embed (~2.5 GB)
 
 # 5. Run
-python app.py     # desktop app (recommended)
-python web.py     # browser-based web UI
+python web.py     # browser-based web UI (smoothest on Linux)
+python app.py     # native desktop app (recommended on Windows)
 python cli.py     # terminal REPL
 ```
 
-Or on Windows, double-click `start.bat` — it auto-detects the venv.
+On **Linux**, make sure `python3-venv` is installed first (`sudo apt install python3-venv`)
+and always `pip install` **inside** the activated venv — see the
+[Linux guide](SETUP_LINUX.md) for the full walkthrough.
+
+On **Windows**, double-click `start.bat` — it auto-detects the venv and does all of the above.
 
 First run downloads a small (~25 MB) ONNX embedding model and prompts you to register an account.
 
@@ -209,6 +220,9 @@ newb_agent/
 ├── web.py                    <- FastAPI server + SSE streaming + WebSocket
 ├── cli.py                    <- terminal REPL
 ├── start.bat                 <- Windows launcher (auto-detects venv)
+├── start.sh                  <- Linux/Mac launcher
+├── SETUP_WINDOWS.md          <- Windows setup guide
+├── SETUP_LINUX.md            <- Linux setup guide
 ├── requirements.txt
 ├── kai/
 │   ├── persona.md            <- edit this to change behavior
