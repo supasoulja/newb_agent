@@ -326,7 +326,7 @@ def _find_large_win(path: str, min_bytes: int, min_size_mb: int, top_n: int) -> 
     if out == _TIMEOUT_SENTINEL:
         return (
             f"Scan of '{path}' timed out (120s). "
-            "Try a more specific folder like 'C:\\Users\\james' or 'C:\\Games', "
+            "Try a more specific folder like 'C:\\Users\\YourName' or 'C:\\Games', "
             "or use files.disk_usage to find which top-level folder is biggest first."
         )
     if not out:
